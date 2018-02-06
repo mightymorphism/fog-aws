@@ -44,6 +44,10 @@ module Fog
               case name
               when 'cidrIp'
                 @ip_range[name] = value
+              when 'description'
+                if @in_ip_ranges then
+                  @ip_range[name] = value
+                end
               when 'fromPort', 'toPort'
                 if @in_ip_permissions_egress
                   @ip_permission_egress[name] = value.to_i
