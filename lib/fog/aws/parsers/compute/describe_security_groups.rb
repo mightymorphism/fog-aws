@@ -22,7 +22,7 @@ module Fog
               @in_ip_permissions = true
             when 'ipPermissionsEgress'
               @in_ip_permissions_egress = true
-            when 'ipRanges'
+            when 'ipRanges', 'ipv6Ranges'
               @in_ip_ranges = true
             when 'tagSet'
               @in_tag_set = true
@@ -42,7 +42,7 @@ module Fog
               end
             else
               case name
-              when 'cidrIp'
+              when 'cidrIp', 'cidrIpv6'
                 @ip_range[name] = value
               when 'description'
                 if @in_ip_ranges then
@@ -74,7 +74,7 @@ module Fog
                 else
                   @ip_permission[name] = value
                 end
-              when 'ipRanges'
+              when 'ipRanges', 'ipv6Ranges'
                 @in_ip_ranges = false
               when 'item'
                 if @in_groups
