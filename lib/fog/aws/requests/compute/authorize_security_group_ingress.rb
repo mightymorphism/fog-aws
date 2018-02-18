@@ -71,6 +71,9 @@ module Fog
             (permission['IpRanges'] || []).each_with_index do |ip_range, range_index|
               range_index += 1
               params[format('IpPermissions.%d.IpRanges.%d.CidrIp', key_index, range_index)] = ip_range['CidrIp']
+              if ip_range['Description'] then
+                params[format('IpPermissions.%d.IpRanges.%d.Description', key_index, range_index)] = ip_range['Description']
+              end
             end
           end
           params.reject {|k, v| v.nil? }
